@@ -1,0 +1,112 @@
+[
+  {
+    "title": "producto 1",
+    "description": "descripcion 1",
+    "price": 10,
+    "thumbnail": "imagen1.jpg",
+    "status": true,
+    "category": "category 1",
+    "code": "P01",
+    "stock": 500,
+    "pid": 1
+  },
+  {
+    "title": "producto 2",
+    "description": "descripcion 2",
+    "price": 20,
+    "thumbnail": "imagen2.jpg",
+    "status": true,
+    "category": "category 1",
+    "code": "P02",
+    "stock": 200,
+    "pid": 2
+  },
+  {
+    "title": "producto 3",
+    "description": "descripcion 3",
+    "price": 204,
+    "thumbnail": "imagen3.jpg",
+    "status": true,
+    "category": "category 2",
+    "code": "P03",
+    "stock": 20,
+    "pid": 3
+  },
+  {
+    "title": "producto 4",
+    "description": "descripcion 4",
+    "price": 209,
+    "thumbnail": "imagen4.jpg",
+    "status": true,
+    "category": "category 1",
+    "code": "P04",
+    "stock": 200,
+    "pid": 4
+  },
+  {
+    "title": "actualizando producto",
+    "description": "descripcion 5",
+    "price": 20,
+    "thumbnail": "imagen5.jpg",
+    "status": true,
+    "category": "category 3",
+    "code": "P05",
+    "stock": 200000,
+    "pid": 5
+  },
+  {
+    "title": "producto 6",
+    "description": "descripcion 6",
+    "price": 60,
+    "thumbnail": "imagen6.jpg",
+    "status": true,
+    "category": "category 2",
+    "code": "P06",
+    "stock": 200,
+    "pid": 6
+  },
+  {
+    "title": "producto 7",
+    "description": "descripcion 7",
+    "price": 2000,
+    "thumbnail": "imagen7.jpg",
+    "status": true,
+    "category": "category 1",
+    "code": "P07",
+    "stock": 200,
+    "pid": 7
+  },
+  {
+    "title": "producto 8",
+    "description": "descripcion 8",
+    "price": 20,
+    "thumbnail": "imagen8.jpg",
+    "status": true,
+    "category": "category 3",
+    "code": "P08",
+    "stock": 200,
+    "pid": 8
+  },
+  {
+    "title": "producto 9",
+    "description": "descripcion 9",
+    "price": 203,
+    "thumbnail": "imagen9.jpg",
+    "status": true,
+    "category": "category 1",
+    "code": "P09",
+    "stock": 1200,
+    "pid": 9
+  },
+  {
+    "title": "producto 10",
+    "description": "descripcion 10",
+    "price": 10,
+    "thumbnail": "imagen10.jpg",
+    "status": true,
+    "category": "category 2",
+    "code": "P010",
+    "stock": 2100,
+    "pid": 10
+  }
+]
