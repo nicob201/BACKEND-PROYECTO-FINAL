@@ -6,23 +6,19 @@ El presente repositorio contiene las entregas del proyecto de una API de una tie
 
 ```bash
 PROYECTO_FINAL/
-│
-├── primera_preentrega/
-│   │
-│   ├── src/
-│   │   ├── controllers/
-│   │   │   ├── carts.js
-│   │   │   ├── products.js
-│   │   │
-│   │   ├── data/
-│   │   │   ├── carts.json
-│   │   │   ├── products.json
-│   │   │
-│   │   ├── routes/
-│   │       ├── carts.router.js
-│   │       ├── products.router.js
-│   │
-│   ├── app.js
+│ ├── src/
+│ │   ├── controllers/
+│ │   │   ├── carts.js
+│ │   │   ├── products.js
+│ │   │
+│ │   ├── data/
+│ │   │   ├── carts.json
+│ │   │   ├── products.json
+│ │   │
+│ │   ├── routes/
+│ │       ├── carts.router.js
+│ │       ├── products.router.js
+│ ├── app.js
 ├── package.json
 └── README.md
 ```

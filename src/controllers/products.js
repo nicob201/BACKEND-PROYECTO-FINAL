@@ -8,13 +8,13 @@ class ProductManager {
   }
 
   // Listar todos los productos
-  getProducts() {
-    this.loadProducts();
+  async getProducts() {
+    await this.loadProducts();
     return this.products;
   }
 
   // Cargar los productos desde el archivo products.json
-  loadProducts() {
+  async loadProducts() {
     try {
       const data = fs.readFileSync(this.path, "utf8");
       if (data) {
@@ -26,7 +26,7 @@ class ProductManager {
   }
 
   // Guardar los productos en el archivo products.json
-  saveProducts() {
+  async saveProducts() {
     try {
       fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2));
       console.log("Products saved successfully!");

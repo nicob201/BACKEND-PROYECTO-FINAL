@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const ProductManager = require("../controllers/products.js");
-const manager = new ProductManager(
-  "./primera_preentrega/src/data/products.json"
-);
+const ProductManager = require("../controllers/products");
+
+const manager = new ProductManager("src/data/products.json");
 
 // Endpoints
 

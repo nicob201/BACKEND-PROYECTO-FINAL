@@ -4,7 +4,7 @@ class Cart {
   constructor(id, products) {
     this.id = id;
     this.products = products;
-    this.path = "./primera_preentrega/src/data/carts.json";
+    this.path = "./src/data/carts.json";
   }
 
   // Cargar el/los carritos que hay en carts.json

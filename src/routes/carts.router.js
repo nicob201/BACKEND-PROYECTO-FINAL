@@ -1,6 +1,6 @@
 const express = require("express");
 const routerCart = express.Router();
-const Cart = require("../controllers/carts.js");
+const Cart = require("../controllers/carts");
 
 const manager = new Cart();
 
