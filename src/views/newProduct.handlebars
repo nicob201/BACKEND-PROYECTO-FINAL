@@ -1,0 +1,42 @@
+<div class="mx-5 mt-5">
+    <h1>Add a new product:</h1>
+</div>
+{{!-- formulario para agregar un nuevo producto --}}
+<form id="productForm">
+    <div class="mx-5 mt-2">
+        <label for="Title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" placeholder="Title of the product" required="true">
+    </div>
+    <div class="mx-5 mt-2">
+        <label for="Description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" placeholder="Describe the product">
+    </div>
+    <div class="mx-5 mt-2">
+        <label for="Price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" required="true">
+    </div>
+    <div class="mx-5 mt-2">
+        <label for="Image" class="form-label">Image</label>
+        <input type="file" class="form-control" id="image">
+    </div>
+    <div class="mx-5 mt-2">
+        <label for="Code" class="form-label">Code</label>
+        <input type="text" class="form-control" id="code" placeholder="This format: C01">
+    </div>
+    <div class="mx-5 mt-2">
+        <label for="Status" class="form-label">Status</label>
+        <select class="form-control" id="status" required="true">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+    </div>
+    <div class="mx-5 mt-2">
+        <label for="Stock" class="form-label">Stock</label>
+        <input type="number" class="form-control" id="stock" placeholder="Enter the stock of the product" required="true">
+    </div>
+    <div class="mx-5 mt-2">
+        <button class="btn btn-primary" type="submit">Add</button>
+    </div>
+</form>
+
+<script src='../public/js/products.js'></script>

@@ -1,21 +1,32 @@
-const express = require("express");
-const path = require("path");
+import express from "express";
+import mongoose from "mongoose";
+import __dirname from "./utils.js";
+import cartRouter from "./routes/cart.router.js";
+import viewsRouter from "./routes/views.router.js";
+import productRouter from "./routes/product.router.js";
+import handlebars from "express-handlebars";
+import dotenv from "dotenv";
+import path from "path";
+dotenv.config();
+
 const app = express();
+const PORT = process.env.PORT;
+app.listen(PORT, console.log(`Server running on port ${PORT} OK`));
 
-const productsRouter = require("./routes/products.router.js");
-const cartRouter = require("./routes/carts.router.js");
-
-const PORT = 8080;
-
-//Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.engine("handlebars", handlebars.engine());
+app.set("views", __dirname + "/views");
+app.set("view engine", "handlebars");
+app.use("/public", express.static(path.join(__dirname, "public")));
 
-// Rutas
-app.use("/api/products/", productsRouter);
-app.use("/api/carts/", cartRouter);
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("Connected to the database!");
+  })
+  .catch((error) => console.error("Connection error!", error));
 
-// Puerto
-app.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT} OK`);
-});
+app.use("/api/carts", cartRouter);
+app.use("/api/products", productRouter);
+app.use("/", viewsRouter);

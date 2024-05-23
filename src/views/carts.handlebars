@@ -1,0 +1,26 @@
+<div class="mx-5 mt-5">
+    <h1>Cart</h1>
+    <div class="mx-5 mt-5 row row-cols-1 row-cols-md-2" id="cartsLogs">
+        {{#each carts}}
+            <div class="g-4 mb-4" data-cart-id="{{this._id}}" id="card-cartId-{{this._id}}">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            {{!-- cada producto del carrito renderiza aca --}}
+                            {{#each products}}
+                                <p class="card-text">Product: {{this.product.title}}</p>
+                                <p class="card-text">Price: {{this.product.price}}</p>
+                                <p class="card-text">Units: {{this.units}}</p>
+                                <button type="button" class="btn btn-secondary" id="deleteProductFromCart-{{this.product._id}}" data-product-id="{{this.product._id}}"><i class="bi bi-x-circle"></i></button>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{!-- boton para eliminar el carrito completo --}}
+                    <button class="btn btn-danger mt-2" type="button" id="deleteButton-{{this._id}}" data-id="{{this._id}}">Delete cart</button>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<script src='../public/js/carts.js'></script>

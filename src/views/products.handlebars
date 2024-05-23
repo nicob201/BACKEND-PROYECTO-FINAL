@@ -1,0 +1,65 @@
+<div class="mx-5 mt-5 container">
+    <h1>Products:</h1>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary col" type="submit"><a class="text-white text-decoration-none" href="/newProduct">New product</a></button>
+        </div>
+        {{!-- Renderiza el sort para ordenar --}}
+        <div class="col-md-auto">
+            <a class="text-black text-decoration-none" href="?sort=asc">Price Asc</a> |
+            <a class="text-black text-decoration-none" href="?sort=desc">Price Desc</a>
+        </div>
+        <div class="col col-lg-2">
+            <div class="row">
+                {{!-- Categorias --}}
+                <p class="col">Categories:</p>
+                <select name="category" class="col">
+                    <option value="">All</option>
+                    {{#each categories}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Bloque para renderizar cada producto --}}
+<div class="mx-5 mt-5 row row-cols-1 row-cols-md-2" id="productLogs">
+    {{#each products}}
+        <div class="g-4 mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Title: {{this.title}}</h5>
+                        <p class="card-text">Description: {{this.description}}</p>
+                        <p class="card-text">Price: {{this.price}}</p>
+                        <p class="card-text">Code: {{this.code}}</p>
+                        <p class="card-text">Category: {{this.category}}</p>
+                        <p class="card-text">Status: {{this.status}}</p>
+                        <p class="card-text">Stock: {{this.stock}}</p>
+                        {{!-- Botones de cada producto --}}
+                        <button class="btn btn-secondary mt-2" id="cartButton-{{this._id}}" data-id="{{this._id}}"><i class="bi bi-cart"></i></button>
+                        <button class="btn btn-warning mt-2" type="button" id="editButton-{{this._id}}" data-id="{{this._id}}">Edit</button>                                    
+                        <button class="btn btn-danger mt-2" type="button" id="deleteButton-{{this._id}}" data-id="{{this._id}}">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+{{!-- Paginado --}}
+<div class="mx-5 mt-1">
+    {{#if hasPrevPage}}
+        <a href="{{prevLink}}"><< Anterior</a>
+    {{/if}}
+    &nbsp;
+    {{page}}
+    &nbsp;
+    {{#if hasNextPage}}
+        <a href="{{nextLink}}">Siguiente >></a>
+    {{/if}}
+</div>
+
+<script src='../public/js/products.js'></script>

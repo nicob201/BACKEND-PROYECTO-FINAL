@@ -1,8 +1,9 @@
 {
   "name": "proyecto_final",
   "version": "1.0.0",
-  "description": "",
+  "description": "El presente repositorio contiene las entregas del proyecto de una API de una tienda online para el curso de Backend en Node.js",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node --watch src/app.js"
   },
@@ -10,6 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "mongoose": "^8.3.5",
+    "mongoose-paginate-v2": "^1.8.1",
+    "sweetalert2": "^11.11.0"
   }
 }

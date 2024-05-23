@@ -1,26 +1,42 @@
 # Proyecto final
 
-El presente repositorio contiene las entregas del proyecto de una API de una tienda online para el curso de Backend en Node.js
+El presente repositorio contiene las entregas del proyecto de una API Restful de un ecommerce para el curso de Backend en Node.js
 
 # Estructura del Repo
 
 ```bash
 PROYECTO_FINAL/
-│ ├── src/
-│ │   ├── controllers/
-│ │   │   ├── carts.js
-│ │   │   ├── products.js
-│ │   │
-│ │   ├── data/
-│ │   │   ├── carts.json
-│ │   │   ├── products.json
-│ │   │
-│ │   ├── routes/
-│ │       ├── carts.router.js
-│ │       ├── products.router.js
-│ ├── app.js
-├── package.json
-└── README.md
+└───src
+    │   app.js
+    │   utils.js
+    │
+    ├───controllers
+    │       cartController.js
+    │       productController.js
+    │
+    ├───dao
+    │   └───models
+    │           cart.model.js
+    │           product.model.js
+    │
+    ├───public
+    │   └───js
+    │           carts.js
+    │           products.js
+    │
+    ├───routes
+    │       cart.router.js
+    │       product.router.js
+    │       views.router.js
+    │
+    └───views
+        │   carts.handlebars
+        │   editProduct.handlebars
+        │   newProduct.handlebars
+        │   products.handlebars
+        │
+        └───layouts
+                main.handlebars
 ```
 
 ## Deployment
@@ -36,16 +52,16 @@ Para correr el proyecto
 
 ## GET
 
-Ruta para productos (lista los 10 productos del "products.json")
+Ruta para productos
 
 ```bash
   http://localhost:8080/api/products
 ```
 
-Ruta para filtrar un producto por su ID, en este caso id = 3
+Ruta para filtrar un producto por su ID, en este caso id = 664a5d4ccb48c4c2425a975c
 
 ```bash
-  http://localhost:8080/api/products/3
+  http://localhost:8080/api/products/664a5d4ccb48c4c2425a975c
 ```
 
 ## POST
@@ -55,9 +71,9 @@ Ruta para crear un producto, pasando por body los params Ej: {
 "description": "descripcion 3",
 "price": 204,
 "thumbnail": "imagen3.jpg",
-"status": true,
-"category": "category 2",
 "code": "P03",
+"category": "Phones",
+"status": true,
 "stock": 20
 }
 
@@ -67,22 +83,22 @@ Ruta para crear un producto, pasando por body los params Ej: {
 
 ## PUT
 
-Ruta para actualizar un producto por su ID, en este caso id = 2 pasando los siguientes parametros por body:
+Ruta para actualizar un producto por su ID, en este caso id = 664a5d4ccb48c4c2425a975c pasando los siguientes parametros por body:
 {
 "title": "actualizando producto",
 "stock": 200000
 }
 
 ```bash
-  http://localhost:8080/api/products/2
+  http://localhost:8080/api/products/664a5d4ccb48c4c2425a975c
 ```
 
 ## DELETE
 
-Ruta para eliminar un producto por su ID, en este caso id = 10
+Ruta para eliminar un producto por su ID, en este caso id = 664a5d4ccb48c4c2425a975c
 
 ```bash
-  http://localhost:8080/api/products/10
+  http://localhost:8080/api/products/1664a5d4ccb48c4c2425a975c
 ```
 
 # Carrito
@@ -95,22 +111,51 @@ Ruta para listar los carritos
   http://localhost:8080/api/carts
 ```
 
-Ruta para listar el carrito con id = 1
+Ruta para listar el carrito con id
 
 ```bash
-  http://localhost:8080/api/carts/1
+  http://localhost:8080/api/carts/:cid
 ```
 
 ## POST
 
-Ruta para crear un nuevo carrito con id incremental
+Ruta para crear un nuevo carrito
 
 ```bash
   http://localhost:8080/api/carts
 ```
 
-Ruta para agregar un producto al carrito, en este caso, el producto con id = 5 en el carrito con id = 1
+## PUT
+
+Ruta para actualizar un carrito, pasando por body por ejemplo: {
+    "units": 500
+}
 
 ```bash
-  http://localhost:8080/api/carts/1/product/5
+  http://localhost:8080/api/carts/:cid/product/:pid
 ```
+
+Ruta para agregar un producto al carrito completando el id del carrito (cid) y el id del producto a agregar (pid)
+
+```bash
+  http://localhost:8080/api/carts/:cid/product/:pid
+```
+
+## Corriendo local la API
+
+En la ruta http://localhost:8080/products se ve asi:
+![alt text](images/vista-products.png)
+
+# Boton "New product"
+Este boton carga un formulario para agregar un nuevo producto:
+![alt text](images/form-new-product.png)
+
+# Boton "edit" de cada producto:
+
+Este boton carga un formulario con los datos precargados del producto que seleccionamos:
+![alt text](images/formulario-precargado.png)
+
+# Carritos
+
+Al entrar a la ruta http://localhost:8080/carts los carritos que hay creados renderizan asi:
+![alt text](images/vista%20carritos.png)
