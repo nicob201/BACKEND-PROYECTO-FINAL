@@ -20,7 +20,7 @@ async function getProducts(req, res) {
     // Filtro por categoria
     const categories = await productModel.distinct("category");
     result.categories = categories;
-    
+
     /* const categoryFiltered = req.query.category;
     if (categoryFiltered) {
       const filteredProducts = allProducts.filter(p => p.category.toLowerCase() === category.toLowerCase());
@@ -31,8 +31,8 @@ async function getProducts(req, res) {
 
     const baseUrl = `/products?limit=${limit}&sort=${sort || ""}&category=${category || ""}`;
 
-    result.prevLink = result.hasPrevPage ? `${baseUrl}&page=${result.prevPage}` : "";
-    result.nextLink = result.hasNextPage ? `${baseUrl}&page=${result.nextPage}` : "";
+    result.prevLink = result.hasPrevPage? `${baseUrl}&page=${result.prevPage}`: "";
+    result.nextLink = result.hasNextPage? `${baseUrl}&page=${result.nextPage}`: "";
     result.isValid = !(page <= 0 || page > result.totalPages);
 
     res.json(result);
@@ -47,7 +47,7 @@ async function getProductById(req, res) {
   try {
     const product = await productModel.findById(req.params.id);
     if (!product) {
-      return res.send({ status: "error", error: "Product not found!" });
+      return res.status(404).send({ status: "error", error: "Product not found!" });
     }
     res.send(product);
   } catch (error) {
@@ -60,10 +60,7 @@ async function getProductById(req, res) {
 async function createProduct(req, res) {
   let { title, description, price, thumbnail, code, status, stock } = req.body;
   if (!title || !price || !stock) {
-    return res.send({
-      status: "error",
-      error: "It is required to input the title, price, and stock",
-    });
+    return res.status(400).send({status: "error",error: "It is required to input the title, price, and stock",});
   }
   try {
     let result = await productModel.create({
@@ -92,10 +89,7 @@ async function updateProduct(req, res) {
     !productToReplace.price ||
     !productToReplace.stock
   ) {
-    return res.send({
-      status: "error",
-      error: "Undefined parameters of products",
-    });
+    return res.status(400).send({status: "error",error: "Undefined parameters of products",});
   }
   try {
     let result = await productModel.updateOne({ _id: pid }, productToReplace);
@@ -111,7 +105,7 @@ async function deleteProduct(req, res) {
   let { pid } = req.params;
   try {
     let result = await productModel.deleteOne({ _id: pid });
-    res.send({ result: "Product deleted!", payload: result });
+    res.status(400).send({ result: "Product deleted!", payload: result });
   } catch (error) {
     console.log("Error deleting product!:", error);
     res.status(500).send({ status: "error", error: "Failed to delete the product!" });

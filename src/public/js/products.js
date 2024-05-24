@@ -65,6 +65,7 @@ const productForm = document.getElementById("productForm");
 if (productForm) {
   productForm.addEventListener("submit", async function (event) {
     event.preventDefault();
+    
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let price = document.getElementById("price").value;
