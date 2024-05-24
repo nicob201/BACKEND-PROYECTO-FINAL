@@ -13,8 +13,8 @@
             <div class="row">
                 {{!-- Categorias --}}
                 <p class="col">Categories:</p>
-                <select name="category" class="col">
-                    <option value="">All</option>
+                <select id="select-category" name="category" class="col">
+                    <option value="all">All</option>
                     {{#each categories}}
                         <option value="{{this}}">{{this}}</option>
                     {{/each}}

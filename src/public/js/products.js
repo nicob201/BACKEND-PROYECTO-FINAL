@@ -14,6 +14,15 @@ document.querySelectorAll('button[id^="editButton-"]').forEach((button) => {
   });
 });
 
+// Filtro de categorias
+let select = document.getElementById("select-category");
+if (select) {
+  select.addEventListener("change", function () {
+    const categoryId = this.options[this.selectedIndex].innerText;
+    window.location.href = `/products/?category=${categoryId}`;
+  });
+}
+
 // Funcion para borrar el producto
 async function deleteProduct(productId) {
   try {
@@ -65,7 +74,7 @@ const productForm = document.getElementById("productForm");
 if (productForm) {
   productForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-    
+
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let price = document.getElementById("price").value;

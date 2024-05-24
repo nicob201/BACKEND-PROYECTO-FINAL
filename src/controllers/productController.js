@@ -4,35 +4,27 @@ import productModel from "../dao/models/product.model.js";
 async function getProducts(req, res) {
   try {
     const { sort, limit = 10, page = 1, category } = req.query;
-    const query = category ? { category: category } : {};
-
-    let productsSorted = {};
+    const query = category ? { category } : {};
+    
+    let options = {
+      limit: parseInt(limit, 10),
+      page: parseInt(page, 10)
+    };
 
     if (sort === "asc" || sort === "desc") {
-      productsSorted.sort = { price: sort === "asc" ? 1 : -1 };
+      options.sort = { price: sort === "asc" ? 1 : -1 };
     }
 
-    productsSorted.limit = parseInt(limit, 10);
-    productsSorted.page = parseInt(page, 10);
-
-    const result = await productModel.paginate({}, productsSorted, query);
+    const result = await productModel.paginate(query, options);
 
     // Filtro por categoria
     const categories = await productModel.distinct("category");
     result.categories = categories;
 
-    /* const categoryFiltered = req.query.category;
-    if (categoryFiltered) {
-      const filteredProducts = allProducts.filter(p => p.category.toLowerCase() === category.toLowerCase());
-      res.json(filteredProducts);
-    } else {
-      res.json(result);
-    } */
-
     const baseUrl = `/products?limit=${limit}&sort=${sort || ""}&category=${category || ""}`;
 
-    result.prevLink = result.hasPrevPage? `${baseUrl}&page=${result.prevPage}`: "";
-    result.nextLink = result.hasNextPage? `${baseUrl}&page=${result.nextPage}`: "";
+    result.prevLink = result.hasPrevPage ? `${baseUrl}&page=${result.prevPage}` : "";
+    result.nextLink = result.hasNextPage ? `${baseUrl}&page=${result.nextPage}` : "";
     result.isValid = !(page <= 0 || page > result.totalPages);
 
     res.json(result);
@@ -41,6 +33,7 @@ async function getProducts(req, res) {
     res.status(500).send({ status: "error", error: "Failed to fetch products!" });
   }
 }
+
 
 // Devuelve un producto por su ID
 async function getProductById(req, res) {
@@ -59,9 +52,11 @@ async function getProductById(req, res) {
 // Crea un nuevo producto
 async function createProduct(req, res) {
   let { title, description, price, thumbnail, code, status, stock } = req.body;
+
   if (!title || !price || !stock) {
     return res.status(400).send({status: "error",error: "It is required to input the title, price, and stock",});
   }
+
   try {
     let result = await productModel.create({
       title,
@@ -91,6 +86,7 @@ async function updateProduct(req, res) {
   ) {
     return res.status(400).send({status: "error",error: "Undefined parameters of products",});
   }
+  
   try {
     let result = await productModel.updateOne({ _id: pid }, productToReplace);
     res.send({ result: "Product edited!", payload: result });
@@ -114,12 +110,16 @@ async function deleteProduct(req, res) {
 
 // Renderiza los productos en el front
 async function renderProducts(req, res) {
-  const { sort, limit = 10, page = 1, category } = req.query;
-  const url = `http://localhost:8080/api/products?sort=${sort}&limit=${limit}&page=${page}&category=${category}`;
 
+  const { sort, limit = 10, page = 1, category = "" } = req.query;
+  
+  const url = `http://localhost:8080/api/products?sort=${sort}&limit=${limit}&page=${page}&category=${category}`;
+  
   try {
+
     const response = await fetch(url);
     const result = await response.json();
+
     res.render("products", {
       products: result.docs,
       totalPages: result.totalPages,
@@ -133,6 +133,7 @@ async function renderProducts(req, res) {
       sort,
       categories: result.categories,
     });
+
   } catch (error) {
     console.log("Error fetching products!", error);
     res.status(500).send({ status: "error", error: "Failed to fetch products!" });

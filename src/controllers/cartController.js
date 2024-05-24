@@ -34,7 +34,6 @@ async function createCart(req, res) {
     return res.status(400).send({ status: "error", error: "Product ID is required" });
   }
   try {
-
     let cart = await cartModel.findOne();
     if (!cart) {
       cart = await cartModel.create({ products: [{ product: productId, units }] });
