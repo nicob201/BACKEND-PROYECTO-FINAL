@@ -144,18 +144,21 @@ Ruta para agregar un producto al carrito completando el id del carrito (cid) y e
 ## Corriendo local la API
 
 En la ruta http://localhost:8080/products se ve asi:
-![alt text](images/vista-products.png)
+![vista-products](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/125da640-fc37-4469-9deb-7d014c2cdd6b)
+
 
 # Boton "New product"
 Este boton carga un formulario para agregar un nuevo producto:
-![alt text](images/form-new-product.png)
+![form-new-product](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/0ba744b7-634d-41af-b709-efb42b27da59)
+
 
 # Boton "edit" de cada producto:
 
 Este boton carga un formulario con los datos precargados del producto que seleccionamos:
-![alt text](images/formulario-precargado.png)
+![formulario-precargado](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/ff83c723-b4ac-4df7-b50f-8dd40a0f4251)
+
 
 # Carritos
 
 Al entrar a la ruta http://localhost:8080/carts los carritos que hay creados renderizan asi:
-![alt text](images/vista%20carritos.png)
+![vista carritos](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/8f38ba44-d5b5-4f6c-aa21-caaa0d6fa2f9)
