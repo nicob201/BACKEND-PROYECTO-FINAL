@@ -1,44 +1,46 @@
-import productModel from "../dao/models/product.model.js";
+import {
+  getProductsService,
+  getProductByIdService,
+  createProductService,
+  updateProductService,
+  deleteProductService,
+  renderProductsService
+} from "../services/productService.js";
 
 // Devuelve todos los productos de la base de datos
 async function getProducts(req, res) {
   try {
-    const { sort, limit = 10, page = 1, category } = req.query;
-    const query = category ? { category } : {};
-    
-    let options = {
-      limit: parseInt(limit, 10),
-      page: parseInt(page, 10)
-    };
-
-    if (sort === "asc" || sort === "desc") {
-      options.sort = { price: sort === "asc" ? 1 : -1 };
-    }
-
-    const result = await productModel.paginate(query, options);
-
-    // Filtro por categoria
-    const categories = await productModel.distinct("category");
-    result.categories = categories;
+    const { sort, limit, page, category } = req.query;
+    const { result, categories } = await getProductsService({ sort, limit, page, category });
 
     const baseUrl = `/products?limit=${limit}&sort=${sort || ""}&category=${category || ""}`;
 
-    result.prevLink = result.hasPrevPage ? `${baseUrl}&page=${result.prevPage}` : "";
-    result.nextLink = result.hasNextPage ? `${baseUrl}&page=${result.nextPage}` : "";
-    result.isValid = !(page <= 0 || page > result.totalPages);
+    // Estructura de la respuesta del server
+    const response = {
+      status: "success",
+      payload: result.docs,
+      totalPages: result.totalPages,
+      prevPage: result.prevPage,
+      nextPage: result.nextPage,
+      page: result.page,
+      hasPrevPage: result.hasPrevPage,
+      hasNextPage: result.hasNextPage,
+      prevLink: result.hasPrevPage ? `${baseUrl}&page=${result.prevPage}` : null,
+      nextLink: result.hasNextPage ? `${baseUrl}&page=${result.nextPage}` : null,
+      categories: categories
+    };
 
-    res.json(result);
+    res.json(response);
   } catch (error) {
     console.log("Error fetching products!", error);
     res.status(500).send({ status: "error", error: "Failed to fetch products!" });
   }
 }
 
-
 // Devuelve un producto por su ID
 async function getProductById(req, res) {
   try {
-    const product = await productModel.findById(req.params.id);
+    const product = await getProductByIdService(req.params.id);
     if (!product) {
       return res.status(404).send({ status: "error", error: "Product not found!" });
     }
@@ -51,22 +53,14 @@ async function getProductById(req, res) {
 
 // Crea un nuevo producto
 async function createProduct(req, res) {
-  let { title, description, price, thumbnail, code, status, stock } = req.body;
+  const { title, description, price, thumbnail, code, status, stock } = req.body;
 
   if (!title || !price || !stock) {
-    return res.status(400).send({status: "error",error: "It is required to input the title, price, and stock",});
+    return res.status(400).send({ status: "error", error: "It is required to input the title, price, and stock", });
   }
 
   try {
-    let result = await productModel.create({
-      title,
-      description,
-      price,
-      thumbnail,
-      code,
-      status: status !== undefined ? status : true,
-      stock,
-    });
+    const result = await createProductService({ title, description, price, thumbnail, code, status, stock });
     res.send({ result: "Product created ok!", payload: result });
   } catch (error) {
     console.log("Error creating product!:", error);
@@ -76,19 +70,15 @@ async function createProduct(req, res) {
 
 // Actualiza un producto existente
 async function updateProduct(req, res) {
-  let { pid } = req.params;
-  let productToReplace = req.body;
+  const { pid } = req.params;
+  const productToReplace = req.body;
 
-  if (
-    !productToReplace.title ||
-    !productToReplace.price ||
-    !productToReplace.stock
-  ) {
-    return res.status(400).send({status: "error",error: "Undefined parameters of products",});
+  if (!productToReplace.title || !productToReplace.price || !productToReplace.stock) {
+    return res.status(400).send({ status: "error", error: "Undefined parameters of products", });
   }
-  
+
   try {
-    let result = await productModel.updateOne({ _id: pid }, productToReplace);
+    const result = await updateProductService(pid, productToReplace);
     res.send({ result: "Product edited!", payload: result });
   } catch (error) {
     console.log("Error updating product!:", error);
@@ -98,9 +88,9 @@ async function updateProduct(req, res) {
 
 // Elimina un producto
 async function deleteProduct(req, res) {
-  let { pid } = req.params;
+  const { pid } = req.params;
   try {
-    let result = await productModel.deleteOne({ _id: pid });
+    const result = await deleteProductService(pid);
     res.status(400).send({ result: "Product deleted!", payload: result });
   } catch (error) {
     console.log("Error deleting product!:", error);
@@ -110,18 +100,14 @@ async function deleteProduct(req, res) {
 
 // Renderiza los productos en el front
 async function renderProducts(req, res) {
+  const { sort, limit, page, category } = req.query;
 
-  const { sort, limit = 10, page = 1, category = "" } = req.query;
-  
-  const url = `http://localhost:8080/api/products?sort=${sort}&limit=${limit}&page=${page}&category=${category}`;
-  
   try {
-
-    const response = await fetch(url);
-    const result = await response.json();
+    const result = await renderProductsService({ sort, limit, page, category });
+    const user = req.session.user;
 
     res.render("products", {
-      products: result.docs,
+      products: result.payload,
       totalPages: result.totalPages,
       prevPage: result.prevPage,
       nextPage: result.nextPage,
@@ -132,8 +118,8 @@ async function renderProducts(req, res) {
       nextLink: result.nextLink,
       sort,
       categories: result.categories,
+      user,
     });
-
   } catch (error) {
     console.log("Error fetching products!", error);
     res.status(500).send({ status: "error", error: "Failed to fetch products!" });

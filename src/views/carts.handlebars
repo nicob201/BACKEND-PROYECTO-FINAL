@@ -1,26 +1,36 @@
-<div class="mx-5 mt-5">
-    <h1>Cart</h1>
-    <div class="mx-5 mt-5 row row-cols-1 row-cols-md-2" id="cartsLogs">
-        {{#each carts}}
-            <div class="g-4 mb-4" data-cart-id="{{this._id}}" id="card-cartId-{{this._id}}">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            {{!-- cada producto del carrito renderiza aca --}}
-                            {{#each products}}
-                                <p class="card-text">Product: {{this.product.title}}</p>
-                                <p class="card-text">Price: {{this.product.price}}</p>
-                                <p class="card-text">Units: {{this.units}}</p>
-                                <button type="button" class="btn btn-secondary" id="deleteProductFromCart-{{this.product._id}}" data-product-id="{{this.product._id}}"><i class="bi bi-x-circle"></i></button>
-                            {{/each}}
-                        </div>
-                    </div>
-                    {{!-- boton para eliminar el carrito completo --}}
-                    <button class="btn btn-danger mt-2" type="button" id="deleteButton-{{this._id}}" data-id="{{this._id}}">Delete cart</button>
-                </div>
-            </div>
-        {{/each}}
+<div class="container-principal cart-container mt-5">
+  <h1 class="text-center mb-4">Cart</h1>
+  <div class="row" id="cartsLogs">
+    {{#each carts}}
+    <div class="col mb-4" data-cart-id="{{this._id}}" id="card-cartId-{{this._id}}">
+      <div class="card">
+        <div class="card-body">
+          {{! cada producto del carrito renderiza aca }}
+          {{#each products}}
+          <div class="product-detail mb-3">
+            <p class="card-text"><strong>Product:</strong>
+              {{this.product.title}}</p>
+            <p class="card-text"><strong>Price:</strong>
+              ${{this.product.price}}</p>
+            <p class="card-text"><strong>Units:</strong> {{this.units}}</p>
+            <button type="button" class="btn btn-secondary btn-sm" id="deleteProductFromCart-{{this.product._id}}"
+              data-product-id="{{this.product._id}}">
+              <i class="bi bi-x-circle"></i>
+              Remove
+            </button>
+          </div>
+          {{/each}}
+        </div>
+        <button class="btn btn-danger btn-sm w-100" type="button" id="deleteButton-{{this._id}}" data-id="{{this._id}}">
+          Delete cart
+        </button>
+      </div>
+      <button class="btn btn-success btn-sm w-100" type="button" id="purchaseButton-{{this._id}}" data-id="{{this._id}}">
+        Purchase
+      </button>
     </div>
+    {{/each}}
+  </div>
 </div>
 
-<script src='../public/js/carts.js'></script>
+<script src="../public/js/carts.js"></script>

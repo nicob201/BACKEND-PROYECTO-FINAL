@@ -1,0 +1,12 @@
+<div class="user-profile mt-5">
+    <h2 class="text-center mb-4">User Profile</h2>
+    <div class="profile-detail">
+        <p><strong>Name:</strong> {{user.first_name}}</p>
+        <p><strong>Surname:</strong> {{user.last_name}}</p>
+        <p><strong>Email:</strong> {{user.email}}</p>
+        <p><strong>Age:</strong> {{user.age}}</p>
+    </div>
+    <form class="text-center mt-4" action="/api/sessions/logout" method="POST">
+        <button type="submit" class="btn btn-logout">Logout</button>
+    </form>
+</div>

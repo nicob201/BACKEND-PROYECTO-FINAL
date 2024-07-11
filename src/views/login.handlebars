@@ -1,0 +1,16 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form action="/api/sessions/login" method="POST" id="loginForm">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" name="email" class="form-control" required />
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" name="password" class="form-control" required />
+    <button type="submit" class="btn btn-login">Login</button>
+    <div class="btn-container mx-5 mt-5 login-btn">
+      <a href="/api/sessions/github" class="btn btn-primary">Login with Github</a>
+      <a href="/api/sessions/google" class="btn btn-primary">Login with Google</a>
+      <a href="/register" class="btn btn-secondary">Register</a>
+      <a href="/api/sessions/reset-password" class="btn btn-secondary">Reset password</a>
+    </div>
+  </form>
+</div>

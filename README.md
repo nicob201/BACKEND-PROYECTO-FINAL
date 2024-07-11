@@ -162,3 +162,19 @@ Este boton carga un formulario con los datos precargados del producto que selecc
 
 Al entrar a la ruta http://localhost:8080/carts los carritos que hay creados renderizan asi:
 ![vista carritos](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/8f38ba44-d5b5-4f6c-aa21-caaa0d6fa2f9)
+
+# Ticket
+
+Por ahora, el ticket que se genera a partir de una orden de compra tiene el siguiente formato:
+
+
+Para probarlo, basta con agregar algun producto al carrito y en la pestaña "cart" dar click en el boton "Purchase"
+El email que se coloque en la variable "MAILING_EMAIL" del process.env sera tanto el mail desde el que se envian los ticket como al cual se reciben.
+Para probar desde el backend esta funcionaliad, se debe hacer un POST a la siguiente ruta>
+```bash
+  http://localhost:8080/api/carts/<completar_Con_ID_Carrito>/ticket
+```
+# Manejo de Roles
+
+Roles "Admin" o "User", si se logea como Admin se habilitan los botones de "edit", "delete" y "new product", si el rol es User solo se pueden agregar productos a un carrito
+

@@ -1,0 +1,13 @@
+<div class="mx-5 mt-5">
+    <h1>Chat de la Api</h1>
+    <h2>Ultimos mensajes:</h2>
+</div>
+<div id="messageLogs" class="mx-5 my-5"></div>
+<div class="d-flex mx-5 mb-7 fixed-bottom gap-1 chat-input">
+    <input type="text" id="chatBox" placeholder="Ingresa tu mensaje" class="form-control bg-light border">
+    <button id="sendMessage" class="btn btn-primary btn-lg">Enviar</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../public/js/chat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

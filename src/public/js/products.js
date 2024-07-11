@@ -23,6 +23,11 @@ if (select) {
   });
 }
 
+// Boton de logout header
+document.getElementById('logoutButton').addEventListener('click', function () {
+  document.getElementById('logoutForm').submit();
+});
+
 // Funcion para borrar el producto
 async function deleteProduct(productId) {
   try {
@@ -41,23 +46,15 @@ async function deleteProduct(productId) {
 }
 
 // Logica para el manejo de carritos
-// Selecciona todos los botones "Add to cart"
-document.querySelectorAll('button[id^="cartButton-"]').forEach((button) => {
-  button.addEventListener("click", async function () {
-    const productId = button.getAttribute("data-id");
-    await addToCart(productId);
-  });
-});
-
 // Funcion para agregar un producto al carrito
-async function addToCart(productId) {
+async function addToCart(productId, units) {
   try {
     const response = await fetch("/api/carts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ productId }),
+      body: JSON.stringify({ productId, units }),
     });
     if (response.ok) {
       console.log(`Product added to cart successfully!`);
@@ -68,6 +65,37 @@ async function addToCart(productId) {
     console.error("Error adding product to cart:", error);
   }
 }
+
+// Selecciona todos los botones "Add to cart"
+document.querySelectorAll('button[id^="cartButton-"]').forEach((button) => {
+  button.addEventListener("click", async function () {
+    const { value: quantity } = await Swal.fire({
+      title: "Units:",
+      input: "number",
+      inputAttributes: {
+        min: 1
+      },
+      inputValidator: (value) => {
+        if (!value) {
+          return "Units must be > 1";
+        }
+      }
+    });
+
+    if (quantity) {
+      const productId = button.getAttribute("data-id");
+      await addToCart(productId, quantity);
+
+      // Alert con el icono de correcto
+      await Swal.fire({
+        icon: 'success',
+        title: 'Product added to cart!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  });
+});
 
 // Formulario para crear productos
 const productForm = document.getElementById("productForm");
@@ -96,9 +124,7 @@ if (productForm) {
     try {
       let response = await fetch("/api/products", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json", },
         body: JSON.stringify(productData),
       });
       let result = await response.json();
@@ -155,9 +181,7 @@ if (editForm) {
     try {
       const response = await fetch(`/api/products/${productId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json", },
         body: JSON.stringify(productData),
       });
       if (response.ok) {

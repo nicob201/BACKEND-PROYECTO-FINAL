@@ -1,0 +1,10 @@
+<div class="restore-container">
+  <h2>Restore Password</h2>
+  <form action="/api/sessions/reset-password" method="POST">
+    <label for="email" class="form-label">Email:</label>
+    <input type="email" name="email" class="form-control" required />
+    <label for="password" class="form-label">New Password:</label>
+    <input type="password" name="password" class="form-control" required />
+    <button type="submit" class="btn btn-reset">Reset</button>
+  </form>
+</div>
