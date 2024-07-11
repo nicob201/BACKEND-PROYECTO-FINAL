@@ -7,36 +7,73 @@ El presente repositorio contiene las entregas del proyecto de una API Restful de
 ```bash
 PROYECTO_FINAL/
 └───src
-    │   app.js
-    │   utils.js
+│   app.js
+│   utils.js
+│   
+├───config
+│       config.js
+│       database.js
+│       passport.config.js
+│       socketConfig.js
+│       
+├───controllers
+│       cartController.js
+│       productController.js
+│       userController.js
+│       
+├───dao
+│   ├───DTOs
+│   │       usersDTO.js
+│   │       
+│   └───models
+│           cart.model.js
+│           message.model.js
+│           product.model.js
+│           ticket.model.js
+│           user.js
+│
+├───middleware
+│       auth.js
+│
+├───public
+│   ├───css
+│   │       styles.css
+│   │
+│   └───js
+│           carts.js
+│           chat.js
+│           products.js
+│
+├───routes
+│   │   cart.router.js
+│   │   messages.router.js
+│   │   product.router.js
+│   │   user.router.js
+│   │   views.router.js
+│   │
+│   └───api
+│           sessions.js
+│
+├───services
+│       cartService.js
+│       emailService.js
+│       messageService.js
+│       productService.js
+│       userService.js
+│
+└───views
+    │   carts.handlebars
+    │   chat.handlebars
+    │   editProduct.handlebars
+    │   login.handlebars
+    │   newProduct.handlebars
+    │   products.handlebars
+    │   profile.handlebars
+    │   register.handlebars
+    │   restorePass.handlebars
     │
-    ├───controllers
-    │       cartController.js
-    │       productController.js
-    │
-    ├───dao
-    │   └───models
-    │           cart.model.js
-    │           product.model.js
-    │
-    ├───public
-    │   └───js
-    │           carts.js
-    │           products.js
-    │
-    ├───routes
-    │       cart.router.js
-    │       product.router.js
-    │       views.router.js
-    │
-    └───views
-        │   carts.handlebars
-        │   editProduct.handlebars
-        │   newProduct.handlebars
-        │   products.handlebars
-        │
-        └───layouts
-                main.handlebars
+    └───layouts
+            main.handlebars
 ```
 
 ## Deployment
