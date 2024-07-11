@@ -181,29 +181,44 @@ Ruta para agregar un producto al carrito completando el id del carrito (cid) y e
 ## Corriendo local la API
 
 En la ruta http://localhost:8080/products se ve asi:
-![vista-products](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/125da640-fc37-4469-9deb-7d014c2cdd6b)
+![vista_products](https://github.com/user-attachments/assets/4c2a6dde-f12b-482e-972b-f8d75ca95a7f)
 
 
 # Boton "New product"
 Este boton carga un formulario para agregar un nuevo producto:
-![form-new-product](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/0ba744b7-634d-41af-b709-efb42b27da59)
+![boton_new_product](https://github.com/user-attachments/assets/a094fff1-7edd-4974-9083-f0eaf2cbbea0)
 
 
 # Boton "edit" de cada producto:
 
 Este boton carga un formulario con los datos precargados del producto que seleccionamos:
-![formulario-precargado](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/ff83c723-b4ac-4df7-b50f-8dd40a0f4251)
+![boton_edit](https://github.com/user-attachments/assets/fa814b54-3d05-4cfb-a7ca-fe34de639c28)
 
 
 # Carritos
 
 Al entrar a la ruta http://localhost:8080/carts los carritos que hay creados renderizan asi:
-![vista carritos](https://github.com/nicob201/BACKEND-PROYECTO-FINAL/assets/88735420/8f38ba44-d5b5-4f6c-aa21-caaa0d6fa2f9)
+![vista_carts](https://github.com/user-attachments/assets/d7779177-79af-44cb-9038-485bfe67fa6b)
+
+# Register
+
+El Registro de usuarios se ve asi:
+![register_user](https://github.com/user-attachments/assets/3481225b-dc4c-4f8e-95fb-aaa8761e63d9)
+
+# Login
+![vista_login](https://github.com/user-attachments/assets/56e6ba77-2a18-430a-af1d-4d180614f6d6)
+
+# Chat
+![vista_chat](https://github.com/user-attachments/assets/0b9abdf4-4937-41be-b879-4bb47195e703)
+
+# Profile
+![vista_profile](https://github.com/user-attachments/assets/6170ca09-ec4f-4884-bce5-43906438ab1b)
 
 # Ticket
 
 Por ahora, el ticket que se genera a partir de una orden de compra tiene el siguiente formato:
 
+![ticket_compra](https://github.com/user-attachments/assets/2dd8e1fa-569b-496f-bc9b-eecd25bbd22c)
 
 Para probarlo, basta con agregar algun producto al carrito y en la pestaña "cart" dar click en el boton "Purchase"
 El email que se coloque en la variable "MAILING_EMAIL" del process.env sera tanto el mail desde el que se envian los ticket como al cual se reciben.
